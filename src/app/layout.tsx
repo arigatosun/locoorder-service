@@ -1,32 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ロコオーダー | 店内飲食向けモバイルオーダーサービス",
-  description: "QRコードの読み取りから注文、キャッシュレス決済まで、シームレスなデジタル体験を提供する店内飲食に特化したモバイルオーダーサービス",
+  description:
+    "QRコードスキャンから注文、キャッシュレス決済まで完結する飲食店向けモバイルオーダーシステム。人手不足解消と業務効率化を実現します。",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="ja">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="ja" className="scroll-smooth">
+      <body className={`${inter.className} dark:bg-[#050505] dark:text-white`}>
         {children}
       </body>
     </html>

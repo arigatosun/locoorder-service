@@ -7,6 +7,7 @@ import RestaurantApp from "../components/RestaurantApp";
 import Environment from "../components/Environment";
 import Support from "../components/Support";
 import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Environment />
       <Support />
       <Contact />
+      <Footer />
     </div>
   );
 }

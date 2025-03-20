@@ -1,22 +1,45 @@
+'use client';
+
 import { FC } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 type BenefitCategoryProps = {
   title: string;
   benefits: { title: string; description: string }[];
   color: string;
   icon: React.ReactNode;
+  index: number;
 };
 
-const BenefitCategory: FC<BenefitCategoryProps> = ({ title, benefits, color, icon }) => {
+const BenefitCategory: FC<BenefitCategoryProps> = ({ title, benefits, color, icon, index }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <div className="bg-white dark:bg-[#121212] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <motion.div 
+      ref={ref}
+      className="bg-white dark:bg-[#121212] p-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+      whileHover={{ y: -5 }}
+    >
       <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-6 ${color}`}>
         {icon}
       </div>
       <h3 className="text-2xl font-bold mb-4">{title}</h3>
       <ul className="space-y-3">
-        {benefits.map((benefit, index) => (
-          <li key={index} className="flex items-start">
+        {benefits.map((benefit, idx) => (
+          <motion.li 
+            key={idx} 
+            className="flex items-start"
+            initial={{ opacity: 0, x: -10 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+            transition={{ duration: 0.4, delay: index * 0.2 + idx * 0.1 }}
+          >
             <svg className="w-5 h-5 text-[#f5ae16] mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
@@ -24,14 +47,19 @@ const BenefitCategory: FC<BenefitCategoryProps> = ({ title, benefits, color, ico
               <span className="font-semibold">{benefit.title}</span>
               <p className="text-gray-600 dark:text-gray-300 text-sm mt-1">{benefit.description}</p>
             </div>
-          </li>
+          </motion.li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 
 export default function Benefits() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   const benefits = [
     {
       title: "業務効率化",
@@ -134,13 +162,19 @@ export default function Benefits() {
   return (
     <section id="benefits" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div 
+          ref={ref}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">導入メリット</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            ロコオーダーは単なる注文システムではなく、<br />
+            ロコオーダーは単なる注文システムではなく、<br className="hidden sm:inline" />
             飲食店運営全体の効率とクオリティを高めるソリューションです
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {benefits.map((category, index) => (
@@ -150,6 +184,7 @@ export default function Benefits() {
               benefits={category.benefits}
               color={category.color}
               icon={category.icon}
+              index={index}
             />
           ))}
         </div>

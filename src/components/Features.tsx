@@ -1,25 +1,47 @@
+'use client';
+
 import { FC } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 type FeatureProps = {
   title: string;
   description: string;
   icon: React.ReactNode;
+  index: number;
 };
 
-const Feature: FC<FeatureProps> = ({ title, description, icon }) => {
+const Feature: FC<FeatureProps> = ({ title, description, icon, index }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-[#121212] rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+    <motion.div 
+      ref={ref}
+      className="flex flex-col items-center text-center p-6 bg-white dark:bg-[#121212] rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+    >
       <div className="w-16 h-16 flex items-center justify-center bg-[#fff8e6] dark:bg-[#1a1302] rounded-full mb-4">
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-gray-600 dark:text-gray-300">{description}</p>
-    </div>
+    </motion.div>
   );
 };
 
 export default function Features() {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   const features = [
     {
       icon: (
@@ -80,12 +102,18 @@ export default function Features() {
   return (
     <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-[#080808]">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div 
+          ref={ref}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">主な特長</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            ロコオーダーは店内飲食に特化した様々な機能で<br />お客様も店舗スタッフも快適な体験を提供します
+            ロコオーダーは店内飲食に特化した様々な機能で<br className="hidden sm:inline" />お客様も店舗スタッフも快適な体験を提供します
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
@@ -94,6 +122,7 @@ export default function Features() {
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
+              index={index}
             />
           ))}
         </div>

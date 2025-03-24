@@ -39,15 +39,6 @@ export default function Support() {
       ),
       title: "運用サポート",
       description: "サーバー監視やバージョンアップ対応など安心の保守体制を整えています。システムの安定稼働を24時間365日見守ります。"
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-[#f5ae16] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ),
-      title: "問い合わせ窓口",
-      description: "導入後も安心の専任サポート体制。お電話やメールでのお問い合わせに、経験豊富なスタッフが迅速に対応いたします。"
     }
   ];
 
@@ -69,7 +60,7 @@ export default function Support() {
         
         <motion.div 
           ref={cardsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8"
           initial={{ opacity: 0, y: 30 }}
           animate={cardsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5 }}
@@ -108,16 +99,6 @@ export default function Support() {
               <p className="text-gray-700 dark:text-gray-300 mb-6">
                 ロコオーダーでは、お客様のニーズに合わせた複数のサポートプランをご用意しています。初期設定から運用まで、店舗の規模や要件に応じた最適なプランをご提案いたします。
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.a 
-                  href="#contact" 
-                  className="bg-[#f5ae16] hover:bg-[#e09c00] text-white font-bold py-3 px-6 rounded-lg text-center transition-colors duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  詳細を問い合わせる
-                </motion.a>
-              </div>
             </div>
             <motion.div 
               className="md:w-1/3 flex justify-center"

@@ -6,7 +6,6 @@ import CustomerApp from "../components/CustomerApp";
 import RestaurantApp from "../components/RestaurantApp";
 import Environment from "../components/Environment";
 import Support from "../components/Support";
-import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
       <Benefits />
       <Environment />
       <Support />
-      <Contact />
       <Footer />
     </div>
   );

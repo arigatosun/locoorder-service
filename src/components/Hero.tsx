@@ -50,12 +50,6 @@ export default function Hero() {
               >
                 サービス詳細を見る
               </a>
-              <a 
-                href="#contact" 
-                className="border-2 border-[#f5ae16] text-[#f5ae16] hover:bg-[#fff8e6] dark:hover:bg-[#1a1302] font-bold py-3 px-8 rounded-full text-center transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-              >
-                お問い合わせ
-              </a>
             </motion.div>
           </motion.div>
           <motion.div 
